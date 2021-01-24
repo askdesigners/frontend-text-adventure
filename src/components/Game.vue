@@ -49,14 +49,14 @@ export default Vue.extend({
       // deepStream.getAllConnectedUsers((error, users) => {
       //   if (!users) return;
       //   this.$store.dispatch(
-      //     'map/setPlayerPresence',
+      //     'game/setPlayerPresence',
       //     users.map(u => ({ name: u, loggedIn: true })),
       //   );
       // });
 
       // deepStream.subscribePresence((name, loggedIn) => {
       //   console.log('just logged in', name, loggedIn);
-      //   this.$store.dispatch('map/setPlayerPresence', { name, loggedIn });
+      //   this.$store.dispatch('game/setPlayerPresence', { name, loggedIn });
 
       //   // if a new user logs in, send our pos to get them up to speed
       //   if (loggedIn) {

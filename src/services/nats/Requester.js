@@ -10,6 +10,7 @@ export default class NatsRequester {
     // a client makes a request and receives a promise for a message
     // by default the request times out after 1s (1000 millis) and has
     // no payload.
+    console.log(data, this.encoder(data));
     return this.client
       .request(route, this.encoder(data), {
         timeout: 2000,

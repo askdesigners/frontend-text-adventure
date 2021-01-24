@@ -4,7 +4,7 @@ export default class NatsSubscription {
   constructor({
     client,
     subject,
-    middleware,
+    middleware = [],
     handler,
     encoder,
     decoder,

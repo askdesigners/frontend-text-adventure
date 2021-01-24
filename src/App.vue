@@ -8,11 +8,11 @@
 export default {
   name: 'App',
   async mounted() {
-    console.log('start mount', this.$bus);
     await this.$bus.init();
-    console.log('done await');
-    const result = await this.$bus.req('user.profile');
-    console.log(result);
+    const jwt = await this.$store.dispatch('game/loadJWT');
+    if (jwt) {
+      this.$router.push('/g');
+    }
   },
 };
 </script>

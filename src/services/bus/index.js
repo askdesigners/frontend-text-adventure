@@ -10,12 +10,10 @@ export default class Bus {
     if (!this.connection) {
       this.connection = await this.natsClient.connect();
     }
-    console.log('done with connect');
     return this.connection;
   }
 
   req(route, data) {
-    console.log('rwerwerer', this.natsClient.makeRequestor());
     return this.natsClient.makeRequestor().request(route, data);
   }
 }

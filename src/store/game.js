@@ -1,14 +1,36 @@
 /* eslint-disable no-param-reassign */
 export const state = () => ({
+  connectionState: null,
+  loginState: null,
+  jwt: null,
   connectedPlayers: [],
   currentPosition: null,
   currentArea: [],
   playersInArea: {},
   currentTheme: null,
   playerName: null,
+  loading: false,
 });
 
 export const actions = {
+  isLoading({ commit }, loading) {
+    commit('SETLOADING', loading);
+  },
+  setConnectionState({ commit }, connectionState) {
+    commit('SETCONNECTIONSTATE', connectionState);
+  },
+  setLoginState({ commit }, loginState) {
+    commit('SETLOGINSTATE', loginState);
+  },
+  setJWT({ commit }, jwt) {
+    localStorage.setItem('token', jwt);
+    commit('SETJWT', jwt);
+  },
+  loadJWT({ commit }) {
+    const jwt = localStorage.getItem('token');
+    commit('SETJWT', jwt);
+    return jwt;
+  },
   setConnectedUsers({ commit }, connectedUsers) {
     commit('SETCONNECTEDUSERS', connectedUsers);
   },
@@ -49,6 +71,18 @@ export const actions = {
 };
 
 export const mutations = {
+  SETLOADING($state, loading) {
+    $state.loading = loading;
+  },
+  SETCONNECTIONSTATE($state, connectionState) {
+    $state.connectionState = connectionState;
+  },
+  SETLOGINSTATE($state, loginState) {
+    $state.loginState = loginState;
+  },
+  SETJWT($state, jwt) {
+    $state.jwt = jwt;
+  },
   SETCONNECTEDUSERS($state, connectedUsers) {
     $state.connectedUsers = connectedUsers;
   },
