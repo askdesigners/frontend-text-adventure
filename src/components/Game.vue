@@ -36,44 +36,17 @@ export default Vue.extend({
   },
   computed: {
     playerName() {
-      return this.$store.state.map.playerName;
+      return this.$store.state.game.playerName;
+    },
+    token() {
+      return this.$store.state.game.jwt;
     },
   },
   mounted() {
-    // deepStream.initConnectionListener((status) => {
-    //   this.$store.dispatch('connection/setConnectionState', status);
-    // });
-    if (this.playerName) {
-      // deepStream.doLogin({ username: this.playerName });
-
-      // deepStream.getAllConnectedUsers((error, users) => {
-      //   if (!users) return;
-      //   this.$store.dispatch(
-      //     'game/setPlayerPresence',
-      //     users.map(u => ({ name: u, loggedIn: true })),
-      //   );
-      // });
-
-      // deepStream.subscribePresence((name, loggedIn) => {
-      //   console.log('just logged in', name, loggedIn);
-      //   this.$store.dispatch('game/setPlayerPresence', { name, loggedIn });
-
-      //   // if a new user logs in, send our pos to get them up to speed
-      //   if (loggedIn) {
-      //     setTimeout(() => {
-      //       deepStream.emitEvent('player/move', {
-      //         player: this.playerName,
-      //         to: this.$store.state.map.currentPosition,
-      //         from: this.$store.state.map.currentPosition,
-      //       });
-      //     }, 200);
-      //   }
-      // });
-
-      this.game.addMoveListener();
-      this.game.addChatListener();
+    if (this.token) {
+      console.log(this.token);
     } else {
-      this.$router.push('/');
+      this.$router.push('/login');
     }
   },
   methods: {
