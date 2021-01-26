@@ -22,15 +22,15 @@ export default Vue.extend({
   name: 'PlayerPresenceBar',
   computed: {
     playerName() {
-      return this.$store.state.map.playerName;
+      return this.$store.state.game.playerName;
     },
     areaPlayersVal() {
-      return this.$store.state.map.playersInArea;
+      return this.$store.state.game.playersInArea;
     },
     areaPlayers() {
-      return Object.keys(this.$store.state.map.playersInArea).map(p => ({
+      return Object.keys(this.$store.state.game.playersInArea).map(p => ({
         name: p,
-        pos: this.$store.state.map.playersInArea[p],
+        pos: this.$store.state.game.playersInArea[p],
       }));
     },
   },

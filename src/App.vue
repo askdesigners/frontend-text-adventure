@@ -7,11 +7,11 @@
 <script>
 export default {
   name: 'App',
-  async mounted() {
+  async created() {
     await this.$bus.init();
     const jwt = await this.$store.dispatch('game/loadJWT');
     if (jwt) {
-      this.$router.push('/g');
+      this.$router.push('/g').catch();
     }
   },
 };

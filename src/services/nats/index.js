@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line import/extensions
 import { connect, JSONCodec } from '../../vendor/nats.js';
@@ -13,6 +14,7 @@ export default class NatsClient {
     this.servers = servers;
     this.natClient = null;
     this.requestor = null;
+    this.connectionListener = null;
   }
 
   async connect(opts) {
@@ -22,6 +24,20 @@ export default class NatsClient {
       ...opts,
     });
     console.log('[NATS] connected');
+    this.listenForConnectionChanges();
+    return this.natsClient;
+  }
+
+  async listenForConnectionChanges() {
+    if (this.connectionListener) this.connectionListener({ type: 'initialConnect' });
+    for await (const s of this.natsClient.status()) {
+      console.log('status', s);
+      if (this.connectionListener) this.connectionListener(s);
+    }
+  }
+
+  addConnectionListener(listener) {
+    this.connectionListener = listener;
   }
 
   makeSubscription(options) {

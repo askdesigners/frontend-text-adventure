@@ -42,7 +42,7 @@ export default Vue.extend({
       if (user) {
         this.$store.dispatch('game/setPlayerName', user.name);
         this.$store.dispatch('game/setJWT', user.jwt);
-        this.$router.push('/g');
+        this.$router.push('/g').catch();
       }
     },
   },

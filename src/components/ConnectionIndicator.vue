@@ -7,24 +7,27 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'ConnectionIndicator',
+  mounted() {
+    this.$bus.addConnectionListener(this.updateStatus);
+  },
+  methods: {
+    updateStatus(status) {
+      this.$store.dispatch('game/setConnectionState', status.type);
+    },
+  },
   computed: {
     status() {
-      console.log(this.$store.state.connection.connectionState);
-      switch (this.$store.state.connection.connectionState) {
-        case 'INITIALISING':
-          return '🕐';
-        case 'AWAITING_CONNECTION':
-          return '🕔';
-        case 'CHALLENGING':
-          return '🕚';
-        case 'AWAITING_AUTHENTICATION':
-          return '🕝';
-        case 'AUTHENTICATING':
-          return '🔓';
-        case 'OPEN':
-          return '';
+      switch (this.$store.state.game.connectionState) {
+        case 'disconnect':
+          return '💀';
+        case 'reconnecting':
+          return '👀';
+        case 'reconnect':
+          return '❤️';
+        case 'initialConnect':
+          return '❤️';
         default:
-          return 'No Connection';
+          return '💀';
       }
     },
   },

@@ -13,7 +13,7 @@ const store = new Vuex.Store({ modules });
 
 Vue.config.productionTip = false;
 
-Vue.prototype.$bus = new Bus();
+Vue.prototype.$bus = new Bus({ store });
 
 /* eslint-disable no-new */
 new Vue({

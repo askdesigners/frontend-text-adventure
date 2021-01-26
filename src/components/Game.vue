@@ -30,7 +30,6 @@ export default Vue.extend({
   },
   data() {
     return {
-      game: {},
       playerInput: null,
     };
   },
@@ -46,13 +45,13 @@ export default Vue.extend({
     if (this.token) {
       console.log(this.token);
     } else {
-      this.$router.push('/login');
+      this.$router.push('/login').catch();
     }
   },
   methods: {
     submitPlayerInput() {
       if (this.playerInput) {
-        this.game.sendMessage(this.playerInput);
+        this.$bus.command(this.playerInput);
         this.playerInput = null;
       }
     },

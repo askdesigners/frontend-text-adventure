@@ -28,6 +28,7 @@ export const actions = {
   },
   loadJWT({ commit }) {
     const jwt = localStorage.getItem('token');
+    console.log(jwt);
     commit('SETJWT', jwt);
     return jwt;
   },

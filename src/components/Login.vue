@@ -36,7 +36,7 @@ export default Vue.extend({
       this.$store.dispatch('game/isLoading', false);
       if (result && result.success) {
         this.$store.dispatch('game/setPlayerName', this.name);
-        this.$router.push('adventure/go');
+        this.$router.push('g').catch();
       } else {
         this.loginError = true;
       }
