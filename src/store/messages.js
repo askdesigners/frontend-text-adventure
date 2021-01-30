@@ -1,23 +1,19 @@
 /* eslint-disable no-param-reassign */
 export const state = () => ({
   messageList: [],
-  playerMessageList: [],
 });
 
 export const actions = {
-  sendCommand({ commit }, message) {
-    commit('ADDMESSAGE', message);
+  addServerMessage({ commit }, message) {
+    commit('ADD_MESSAGE', { source: 'server', ...message });
   },
   addPlayerMessage({ commit }, message) {
-    commit('ADDPLAYERMESSAGE', message);
+    commit('ADD_MESSAGE', { source: 'player', message });
   },
 };
 
 export const mutations = {
-  ADDMESSAGE($state, message) {
-    $state.messageList = [...$state.messageList, message];
-  },
-  ADDPLAYERMESSAGE($state, message) {
-    $state.playerMessageList = [...$state.playerMessageList, message];
+  ADD_MESSAGE($state, message) {
+    $state.messageList = [...$state.messageList, { ts: new Date().getTime(), ...message }];
   },
 };

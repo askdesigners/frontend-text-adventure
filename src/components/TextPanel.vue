@@ -4,9 +4,9 @@
       <transition-group name="slide-in" tag="div" class="HistoryMessageWrapper">
         <TextPanelMessage
           v-for="(message, index) in messageList"
-          :key="message.id"
+          :key="message.ts"
           :message="message"
-          :ref="message.id"
+          :ref="message.ts"
           :isLatest="(index+1) === messageList.length"
         />
       </transition-group>
@@ -26,8 +26,7 @@ export default Vue.extend({
   },
   watch: {
     messageList(list) {
-      const latest = list[list.length - 1];
-      latest.map();
+      console.log(list);
       setTimeout(() => {
         document
           .querySelector('.GamePanelWrapper')
@@ -40,7 +39,7 @@ export default Vue.extend({
   },
   computed: {
     messageList() {
-      return [].concat(this.$store.state.messages.messageList);
+      return [...this.$store.state.messages.messageList];
     },
   },
   mounted() {},

@@ -22,7 +22,10 @@ export default class Bus {
     return this.natsClient.makeRequestor().request(route, data);
   }
 
-  command(command) {
-    return this.req('user.command', { command, jwt: this.store.state.game.jwt });
+  async command(command) {
+    this.store.dispatch('messages/addPlayerMessage', command);
+    const response = await this.req('user.command', { command, jwt: this.store.state.game.jwt });
+    this.store.dispatch('messages/addServerMessage', response);
+    return response;
   }
 }

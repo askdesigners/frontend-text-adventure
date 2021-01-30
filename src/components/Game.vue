@@ -42,16 +42,14 @@ export default Vue.extend({
     },
   },
   mounted() {
-    if (this.token) {
-      console.log(this.token);
-    } else {
+    if (!this.token) {
       this.$router.push('/login').catch();
     }
   },
   methods: {
-    submitPlayerInput() {
+    async submitPlayerInput() {
       if (this.playerInput) {
-        this.$bus.command(this.playerInput);
+        const result = await this.$bus.command(this.playerInput);
         this.playerInput = null;
       }
     },
