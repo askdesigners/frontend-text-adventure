@@ -19,15 +19,17 @@ export default Vue.extend({
     status() {
       switch (this.$store.state.game.connectionState) {
         case 'disconnect':
-          return '💀';
+          return 'disconnect';
         case 'reconnecting':
-          return '👀';
+          return 'reconnecting';
         case 'reconnect':
-          return '❤️';
+          return 'connected';
         case 'initialConnect':
-          return '❤️';
+          return 'connected';
+        case 'pingTimer':
+          return 'connected';
         default:
-          return '💀';
+          return 'unknown';
       }
     },
   },

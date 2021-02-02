@@ -49,7 +49,7 @@ export default Vue.extend({
   methods: {
     async submitPlayerInput() {
       if (this.playerInput) {
-        const result = await this.$bus.command(this.playerInput);
+        this.$bus.command(this.playerInput);
         this.playerInput = null;
       }
     },

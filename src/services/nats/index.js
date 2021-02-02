@@ -31,7 +31,6 @@ export default class NatsClient {
   async listenForConnectionChanges() {
     if (this.connectionListener) this.connectionListener({ type: 'initialConnect' });
     for await (const s of this.natsClient.status()) {
-      console.log('status', s);
       if (this.connectionListener) this.connectionListener(s);
     }
   }
@@ -67,7 +66,6 @@ export default class NatsClient {
         decoder: decode,
         encoder: encode,
       };
-      console.log(opts);
       this.requestor = new Requester(opts);
     }
     return this.requestor;
