@@ -4,12 +4,17 @@ export const state = () => ({
   loginState: null,
   jwt: null,
   connectedPlayers: [],
-  currentPosition: null,
+  currentPosition: {},
   currentArea: [],
+  inventory: [],
+  holding: {},
   playersInArea: {},
   currentTheme: null,
   playerName: null,
   loading: false,
+  strength: null,
+  health: null,
+  currentPlace: {},
 });
 
 export const actions = {
@@ -26,6 +31,28 @@ export const actions = {
     localStorage.setItem('token', jwt);
     commit('SETJWT', jwt);
   },
+  setInventory({ commit }, items) {
+    commit('SETINVENTORY', items);
+  },
+  setHolding({ commit }, item) {
+    commit('SETHOLDING', item);
+  },
+  setCurrentPosition({ commit }, currentPosition) {
+    commit('SETCURRENTPOSITION', currentPosition);
+  },
+  setPlayerName({ commit }, name) {
+    localStorage.playerName = name;
+    commit('SETPLAYERNAME', name);
+  },
+  setStrength({ commit }, strength) {
+    commit('SETSTRENGTH', strength);
+  },
+  setHealth({ commit }, health) {
+    commit('SETHEALTH', health);
+  },
+  setCurrentPlace({ commit }, place) {
+    commit('SETCURRENTPLACE', place);
+  },
   loadJWT({ commit }) {
     const jwt = localStorage.getItem('token');
     commit('SETJWT', jwt);
@@ -33,10 +60,6 @@ export const actions = {
   },
   setConnectedUsers({ commit }, connectedUsers) {
     commit('SETCONNECTEDUSERS', connectedUsers);
-  },
-  setCurrentPosition({ commit }, currentPosition) {
-    localStorage.currentPosition = currentPosition;
-    commit('SETCURRENTPOSITION', currentPosition);
   },
   setCurrentArea({ commit }, adjTo) {
     commit('SETCURRENTAREA', adjTo);
@@ -55,10 +78,6 @@ export const actions = {
   },
   setCurrentTheme({ commit }, currentTheme) {
     commit('SETCURRENTTHEME', currentTheme);
-  },
-  setPlayerName({ commit }, name) {
-    localStorage.playerName = name;
-    commit('SETPLAYERNAME', name);
   },
   setPlayerPresence({ commit }, player) {
     if (player.loggedIn) {
@@ -83,11 +102,29 @@ export const mutations = {
   SETJWT($state, jwt) {
     $state.jwt = jwt;
   },
-  SETCONNECTEDUSERS($state, connectedUsers) {
-    $state.connectedUsers = connectedUsers;
+  SETINVENTORY($state, items) {
+    $state.inventory = items;
+  },
+  SETHOLDING($state, item) {
+    $state.holding = item;
+  },
+  SETSTRENGTH($state, strength) {
+    $state.strength = strength;
+  },
+  SETHEALTH($state, health) {
+    $state.health = health;
+  },
+  SETCURRENTPLACE($state, currentPlace) {
+    $state.currentPlace = currentPlace;
   },
   SETCURRENTPOSITION($state, currentPosition) {
     $state.currentPosition = currentPosition;
+  },
+  SETPLAYERNAME($state, playerName) {
+    $state.playerName = playerName;
+  },
+  SETCONNECTEDUSERS($state, connectedUsers) {
+    $state.connectedUsers = connectedUsers;
   },
   SETCURRENTAREA($state, currentArea) {
     $state.currentArea = currentArea;
@@ -102,9 +139,6 @@ export const mutations = {
   },
   SETCURRENTTHEME($state, currentTheme) {
     $state.currentTheme = currentTheme;
-  },
-  SETPLAYERNAME($state, playerName) {
-    $state.playerName = playerName;
   },
   ADDPLAYER($state, playerName) {
     $state.connectedPlayers = [...$state.connectedPlayers, playerName];

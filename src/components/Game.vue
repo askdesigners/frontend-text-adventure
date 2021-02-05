@@ -41,17 +41,27 @@ export default Vue.extend({
       return this.$store.state.game.jwt;
     },
   },
-  mounted() {
+  async mounted() {
     if (!this.token) {
       this.$router.push('/login').catch();
     }
+    await this.$bus.init();
+    await this.fetchPlayer();
+    this.fetchPlace();
   },
   methods: {
-    async submitPlayerInput() {
+    submitPlayerInput() {
       if (this.playerInput) {
         this.$bus.command(this.playerInput);
         this.playerInput = null;
       }
+    },
+    async fetchPlayer() {
+      return this.$bus.getPlayer();
+    },
+    async fetchPlace() {
+      const { x, y } = this.$store.state.game.currentPosition;
+      this.$bus.getCurrentPlace({ x, y });
     },
   },
 });

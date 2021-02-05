@@ -28,4 +28,20 @@ export default class Bus {
     this.store.dispatch('messages/addServerMessage', response);
     return response;
   }
+
+  async getPlayer(command) {
+    const { user } = await this.req('user.get', { command, jwt: this.store.state.game.jwt });
+    console.log(user);
+    this.store.dispatch('game/setInventory', user.inventory);
+    this.store.dispatch('game/setHolding', user.holding);
+    this.store.dispatch('game/setCurrentPosition', { x: user.x, y: user.y });
+    this.store.dispatch('game/setPlayerName', user.name);
+    this.store.dispatch('game/setStrength', user.strength);
+    this.store.dispatch('game/setHealth', user.health);
+  }
+
+  async getCurrentPlace({ x, y }) {
+    const { place } = await this.req('map.getPlace', { x, y, jwt: this.store.state.game.jwt });
+    this.store.dispatch('game/setCurrentPlace', place);
+  }
 }
