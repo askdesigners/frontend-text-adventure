@@ -1,30 +1,34 @@
 <template>
-  <div class="GamePanelWrapper bg-gray-100">
+  <div class="GamePanelWrapper grid gap-4 grid-cols-3 bg-gray-100">
     <ConnectionIndicator />
-    <div class="GamNavWrapper p-2"></div>
-    <TextPanel />
-    <form class="PlayerInput p-4 shadow-2xl" v-on:submit.prevent="submitPlayerInput()">
-      <PlayerPresenceBar />
-      <div class="LowerBar flex items-center pt-1">
-        <input
-          class="Input border-solid border-2 border-teal-400 bg-teal-300 mr-3 flex-grow"
-          v-model="playerInput"
-        />
-        <button class="PlayerInputSubmit Button Button--green">send ⮐</button>
-      </div>
-    </form>
+    <div class="GamNavWrapper p-2">
+      <PlacePanel />
+      <TextPanel />
+      <form class="PlayerInput p-4 shadow-2xl" v-on:submit.prevent="submitPlayerInput()">
+        <PlayerPresenceBar />
+        <div class="LowerBar flex items-center pt-1">
+          <input
+            class="Input border-solid border-2 border-teal-400 bg-teal-300 mr-3 flex-grow"
+            v-model="playerInput"
+          />
+          <button class="PlayerInputSubmit Button Button--green">send ⮐</button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
 import TextPanel from '../components/TextPanel';
+import PlacePanel from '../components/PlacePanel';
 import PlayerPresenceBar from '../components/PlayerPresenceBar';
 import ConnectionIndicator from '../components/ConnectionIndicator';
 
 export default Vue.extend({
   components: {
     TextPanel,
+    PlacePanel,
     ConnectionIndicator,
     PlayerPresenceBar,
   },
