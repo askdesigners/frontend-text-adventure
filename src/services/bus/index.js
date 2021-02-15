@@ -26,6 +26,10 @@ export default class Bus {
     this.store.dispatch('messages/addPlayerMessage', command);
     const response = await this.req('user.command', { command, jwt: this.store.state.game.jwt });
     this.store.dispatch('messages/addServerMessage', response);
+    if (response.place) {
+      this.store.dispatch('game/setCurrentPosition', { x: response.place.x, y: response.place.y });
+      this.store.dispatch('game/setCurrentPlace', response.place);
+    }
     return response;
   }
 

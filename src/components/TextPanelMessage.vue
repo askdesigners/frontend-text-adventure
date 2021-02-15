@@ -1,7 +1,7 @@
 <template>
   <div class="TextPanelMessageWrapper rounded-md mb-2">
     <div v-if="message.source === 'game'" class="GameMessage p-2">
-      <p class="TextPanelMessage font-bold text-xs">> {{message.message}}</p>
+      <p class="TextPanelMessage font-bold text-xs">> {{message}}</p>
     </div>
     <div v-else-if="message.source === 'playerChat'" class="PlayerChatMessage p-2">
       <p class="TextPanelPlaceName font-bold text-sm p-1">{{message.player}} says:</p>

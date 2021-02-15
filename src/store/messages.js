@@ -4,7 +4,7 @@ export const state = () => ({
 });
 
 export const actions = {
-  addServerMessage({ commit }, message) {
+  addServerMessage({ commit}, message) {
     commit('ADD_MESSAGE', { source: 'server', ...message });
   },
   addPlayerMessage({ commit }, message) {
