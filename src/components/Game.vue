@@ -1,20 +1,20 @@
 <template>
-  <div class="GamePanelWrapper grid gap-4 grid-cols-3 bg-gray-100">
-    <ConnectionIndicator />
-    <div class="GamNavWrapper p-2">
+  <div class="GamePanelWrapper grid gap-4 grid-cols-6 grid-rows-6 bg-gray-100">
+    <ConnectionIndicator class="col-span-1 col-start-6"/>
+    <div class="GamNavWrapper col-span-4 col-start-2 row-start-1">
       <PlacePanel />
       <TextPanel />
-      <form class="PlayerInput p-4 shadow-2xl" v-on:submit.prevent="submitPlayerInput()">
-        <PlayerPresenceBar />
-        <div class="LowerBar flex items-center pt-1">
-          <input
-            class="Input border-solid border-2 border-teal-400 bg-teal-300 mr-3 flex-grow"
-            v-model="playerInput"
-          />
-          <button class="PlayerInputSubmit Button Button--green">send ⮐</button>
-        </div>
-      </form>
     </div>
+    <form class="PlayerInput col-span-4 col-start-2 row-span-1 row-start-6" v-on:submit.prevent="submitPlayerInput()">
+      <PlayerPresenceBar />
+      <div class="LowerBar flex items-center pt-1">
+        <input
+          class="Input border-solid border-2 border-teal-400 bg-teal-300 mr-3 flex-grow"
+          v-model="playerInput"
+        />
+        <button class="PlayerInputSubmit Button Button--green">send ⮐</button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -73,13 +73,7 @@ export default Vue.extend({
 
 <style>
 .GamePanelWrapper {
-  height: calc(100vh - 90px);
+  height: 100vh;
   overflow-y: scroll;
-}
-.PlayerInput {
-  background: white;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
 }
 </style>

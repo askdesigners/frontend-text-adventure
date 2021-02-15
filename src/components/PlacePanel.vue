@@ -2,9 +2,9 @@
   <div class="TextPanelWrapper">
     <div class="TextPanelHistory p-2">
       <transition-group name="slide-in" tag="div" class="HistoryMessageWrapper">
-        <h2 key="title">place {{place.key}}</h2>
-        <p key="name" class="TextPanelMessage p-1">{{place.name}}</p>
-        <p key="description" class="TextPanelMessage p-1">{{place.description}}</p>
+        <h2 class="text-xs font-bold" key="title">[ {{place.key}} ]</h2>
+        <p key="name" class="TextPanelMessage text-2xl font-bold pt-5">{{place.name}}</p>
+        <p key="description" class="TextPanelMessage">{{place.description}}</p>
       </transition-group>
     </div>
   </div>
